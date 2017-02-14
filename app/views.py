@@ -41,6 +41,17 @@ def add_file():
         return redirect(url_for('home'))
 
     return render_template('add_file.html')
+    
+    
+@app.route("/filelisting")
+def iterateFile():
+    rootdir = os.getcwd()
+    print rootdir
+    for subdir, dirs, files in os.walk(rootdir + "static/uploads"):
+        for file in files:
+            print os.path.join(subdir, file)
+            
+            
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():

@@ -10,12 +10,9 @@ from flask import render_template, request, redirect, url_for, flash, session, a
 from werkzeug.utils import secure_filename
 
 
-
-file_folder = app.config["UPLOAD_FOLDER"]
 ###
 # Routing for your application.
 ###
-
 
 @app.route('/')
 def home():
@@ -46,25 +43,26 @@ def add_file():
     return render_template('add_file.html')
     
     
-    
 @app.route("/filelisting")
-def filelisting():
+def iterateFile():
     if not session.get("logged_in"):
         abort(401)
     filelist = []
+    jpglist = []
         
     rootdir = os.getcwd()
     print rootdir
     for subdir, dirs, files in os.walk(rootdir + "/app/static/uploads"):
         for file in files:
-            filelist = filelist + [file]
+            if file.lower().endswith(".jpg"):
+                jpglist = jpglist + [file]
+            else:
+                filelist = filelist + [file]
             # [os.path.join(subdir,file)]
+
+    return render_template("filelisting.html", jpglist =  jpglist, files = filelist)
             
-    return render_template("filelisting.html", files =  filelist);
-    
-    
-    
-    
+            
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():

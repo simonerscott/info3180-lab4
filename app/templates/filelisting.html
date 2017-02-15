@@ -3,7 +3,7 @@
 
 {% block css %}
 
-<!--<link rel="stylesheet" href="/static/css/filelisting.css"> -->
+<link rel="stylesheet" href="/static/css/filelisting.css"> 
 
 {% endblock %}
 
@@ -13,14 +13,30 @@
 
 <h1> List of Files </h1> <hr>
 
+
+<h3> Non JPG Files</h3>
 <div>
     {% for file in files %}
-    
     
     <li> {{ file }}</li>
     
     {% endfor %}
-   
+</div>
+
+
+
+<div id = "image">   
+    
+    <h3>Images</h3>
+    {% for jpg in jpglist %}
+    
+    <!--<li> {{ jpg }} </li>-->
+    <ul>
+        <li> <img src = "{{ url_for('static', filename = 'uploads/' + jpg ) }}" width="120" height="90"/> {{ jpg }} </li>
+    </ul>
+
+    
+    {% endfor %}
 </div>
 
 {% endblock %}

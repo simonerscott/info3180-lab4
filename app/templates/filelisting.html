@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+
+{% block css %}
+
+<!--<link rel="stylesheet" href="/static/css/filelisting.css"> -->
+
+{% endblock %}
+
+
+
+{% block main %}
+
+<h1> List of Files </h1> <hr>
+
+<div>
+    {% for file in files %}
+    
+    
+    <li> {{ file }}</li>
+    
+    {% endfor %}
+   
+</div>
+
+{% endblock %}

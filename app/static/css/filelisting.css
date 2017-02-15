@@ -1,0 +1,18 @@
+@app.route("/filelisting")
+def filelisting():
+    if not session.get("logged_in"):
+        abort(401)
+    file2 = []
+        
+    rootdir = os.getcwd()
+    print rootdir
+    for subdir, dirs, files in os.walk(rootdir + "/app/static/uploads"):
+        for file in files:
+            file2 = file2 + [os.path.join(subdir,file)]
+            
+    return render_template("filelisting.html", file2 =  file2);
+    
+    
+    
+    
+    http://stackoverflow.com/questions/33355159/how-can-i-dynamically-render-images-from-my-images-folder-using-jinja-and-flask
